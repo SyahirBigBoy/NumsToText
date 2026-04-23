@@ -23,6 +23,16 @@ public class NumsConverterController : Controller
             ViewBag.Result = "Zero";
             return View("NumsConverter");
         }
+        if (inputNumber < 0)
+        {
+            ViewBag.Result = "Negative numbers are not supported.";
+            return View("NumsConverter");
+        }
+        if(inputNumber > 999999999999)
+        {
+            ViewBag.Result = "Numbers greater than 999,999,999,999 are not supported.";
+            return View("NumsConverter");
+        }
 
 
         var basicNum = mappingList.Mappings.FirstOrDefault(m => m.GroupType == "Units")?.GroupNumberInText.Split(',');
