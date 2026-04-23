@@ -16,6 +16,7 @@ public class NumsConverterController : Controller
     {
         //get our mapping list model
         var mappingList = new NumberTextMappingList();
+        ViewBag.InputNumber = inputNumber;
 
         if (inputNumber == 0)
         {

@@ -7,14 +7,14 @@
     <p>Enter a number to convert it to text.</p>
     <form method="post" asp-action="Convert">
         <div class="form-group">
-            <input type="number"  step="0.01" class="form-control" name="inputNumber" placeholder="Enter your number" required />
+            <input type="number" step="0.01" class="form-control" name="inputNumber" value="@ViewBag.InputNumber" placeholder="Enter your number" required />
         </div>
-        <button type="submit" class="btn btn-primary">Convert</button>
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Convert</button>
     </form>
     @if (ViewBag.Result != null)
     {
         <div class="alert alert-success mt-3">
-            Result: @ViewBag.Result
+            In Text is :@ViewBag.Result
         </div>
     }
 </div>
