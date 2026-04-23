@@ -70,6 +70,10 @@ public class NumsConverterController : Controller
                 resultConverted += ProcessNumber(wholeNumber / 1_000, basicNum, teens, tens, mults) + " " + mults[1] + " ";
                 wholeNumber %= 1_000;
             }
+            if(resultConverted != "" && wholeNumber > 0) //if got balance and already have text, add and before next text
+            {
+                resultConverted += "and ";
+            }
             resultConverted += ProcessNumber(wholeNumber, basicNum, teens, tens, mults);
         }
 
@@ -105,14 +109,6 @@ public class NumsConverterController : Controller
         {
             subResult += basicNum?[input / 100 - 1] + " " + mults?[0] + " ";
             input %= 100;
-            if(input > 0) //got balance if 201/200 = 1 , make it and 1
-            {
-                subResult += "and ";
-            }
-            else
-            {
-                return subResult.Trim();
-            }
         }
         if (input >= 20)
         {
