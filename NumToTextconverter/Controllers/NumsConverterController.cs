@@ -62,6 +62,25 @@ public class NumsConverterController : Controller
             resultConverted += ProcessNumber(wholeNumber, basicNum, teens, tens, mults);
         }
 
+        // Process fraction part if exists
+        if (fractionPart > 0)
+        {
+            resultConverted += " point";
+            string fractionStr = fractionPart.ToString().Split('.')[1]; 
+            foreach (char digit in fractionStr)
+            {
+                int digitValue = int.Parse(digit.ToString());
+                if (digitValue == 0)
+                {
+                    resultConverted += " Zero";
+                }
+                else
+                {
+                    resultConverted += " " + basicNum?[digitValue - 1];
+                }
+            }
+        }
+
         ViewBag.Result = resultConverted.Trim();
         return View("NumsConverter");
     }
@@ -75,6 +94,14 @@ public class NumsConverterController : Controller
         {
             subResult += basicNum?[input / 100 - 1] + " " + mults?[0] + " ";
             input %= 100;
+            if(input > 0) //got balance if 201/200 = 1 , make it and 1
+            {
+                subResult += "and ";
+            }
+            else
+            {
+                return subResult.Trim();
+            }
         }
         if (input >= 20)
         {
