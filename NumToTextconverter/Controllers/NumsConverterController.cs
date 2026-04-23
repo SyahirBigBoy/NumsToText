@@ -23,17 +23,51 @@ public class NumsConverterController : Controller
             return View("NumsConverter");
         }
 
+
         var basicNum = mappingList.Mappings.FirstOrDefault(m => m.GroupType == "Units")?.GroupNumberInText.Split(',');
         var teens = mappingList.Mappings.FirstOrDefault(m => m.GroupType == "Teens")?.GroupNumberInText.Split(',');
         var tens = mappingList.Mappings.FirstOrDefault(m => m.GroupType == "Tens")?.GroupNumberInText.Split(',');
         var mults = mappingList.Mappings.FirstOrDefault(m => m.GroupType == "Multiplier")?.GroupNumberInText.Split(',');
-        
-        string result = "";
+
+        //Consider decimal number
+        long wholeNumber = (long)Math.Truncate(inputNumber); 
+        decimal fractionPart = inputNumber - wholeNumber;  
+
+
+        string resultConverted = "";
+
+        // Process whole number
+        if(wholeNumber == 0)
+        {
+            resultConverted = "Zero";
+        }
+        else
+        {
+            //process billion and attach multiplier text
+            if (wholeNumber >= 1_000_000_000)
+            {
+                resultConverted += ProcessNumber(wholeNumber / 1_000_000_000, basicNum, teens, tens, mults) + " " + mults[3] + " ";
+                wholeNumber %= 1_000_000_000;
+            }
+            if (wholeNumber >= 1_000_000)
+            {
+                resultConverted += ProcessNumber(wholeNumber / 1_000_000, basicNum, teens, tens, mults) + " " + mults[2] + " ";
+                wholeNumber %= 1_000_000;
+            }
+            if (wholeNumber >= 1_000)
+            {
+                resultConverted += ProcessNumber(wholeNumber / 1_000, basicNum, teens, tens, mults) + " " + mults[1] + " ";
+                wholeNumber %= 1_000;
+            }
+            resultConverted += ProcessNumber(wholeNumber, basicNum, teens, tens, mults);
+        }
+
+        ViewBag.Result = resultConverted.Trim();
         return View("NumsConverter");
     }
 
     //process input of hundereds and below
-    private string ProcessHundredNumber(long input, string[] basicNum, string[] teens, string[] tens, string[] mults)
+    private string ProcessNumber(long input, string[] basicNum, string[] teens, string[] tens, string[] mults)
     {
         
         string subResult = "";
