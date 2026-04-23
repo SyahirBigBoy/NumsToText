@@ -20,6 +20,6 @@ public class NumberTextMappingList
         Mappings.Add(new NumberTextMapping { GroupType = "Units", GroupNumberInText = "One, Two, Three, Four, Five, Six, Seven, Eight, Nine" });
         Mappings.Add(new NumberTextMapping { GroupType = "Teens", GroupNumberInText = "Ten, Eleven, Twelve, Thirteen, Fourteen, Fifteen, Sixteen, Seventeen, Eighteen, Nineteen" });
         Mappings.Add(new NumberTextMapping { GroupType = "Tens", GroupNumberInText = "Twenty, Thirty, Forty, Fifty, Sixty, Seventy, Eighty, Ninety" });
-        Mappings.Add(new NumberTextMapping { GroupType = "Hundreds", GroupNumberInText = "One Hundred, Two Hundred, Three Hundred, Four Hundred, Five Hundred, Six Hundred, Seven Hundred, Eight Hundred, Nine Hundred" });
+        Mappings.Add(new NumberTextMapping { GroupType = "Multiplier", GroupNumberInText = "Hundred,Thousand,Million,Billion" });
     }
 }
