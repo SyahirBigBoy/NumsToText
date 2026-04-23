@@ -1,0 +1,20 @@
+@{
+    ViewData["Title"] = "Nums to Text Converter";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Nums to Text Converter</h1>
+    <p>Enter a number to convert it to text.</p>
+    <form method="post" asp-action="Convert">
+        <div class="form-group">
+            <input type="text" class="form-control" name="number" placeholder="Enter your number" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Convert</button>
+    </form>
+    @if (ViewBag.Result != null)
+    {
+        <div class="alert alert-success mt-3">
+            Result: @ViewBag.Result
+        </div>
+    }
+</div>
