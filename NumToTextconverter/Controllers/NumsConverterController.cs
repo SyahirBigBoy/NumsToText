@@ -32,6 +32,32 @@ public class NumsConverterController : Controller
         return View("NumsConverter");
     }
 
+    //process input of hundereds and below
+    private string ProcessHundredNumber(long input, string[] basicNum, string[] teens, string[] tens, string[] mults)
+    {
+        
+        string subResult = "";
+        if (input >= 100)
+        {
+            subResult += basicNum?[input / 100 - 1] + " " + mults?[0] + " ";
+            input %= 100;
+        }
+        if (input >= 20)
+        {
+            subResult += tens?[(input / 10) - 2] + " ";
+            input %= 10;
+        }
+        if (input >= 10)
+        {
+            subResult += teens?[(int)(input % 10)] + " ";
+            input = 0;
+        }
+        if (input > 0)
+        {
+            subResult += basicNum?[(int)input - 1] + " ";
+        }
+        return subResult.Trim();
+    }
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
